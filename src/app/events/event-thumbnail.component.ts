@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'event-thumbnail',
-  template: `<div class="well hoverwell thumbnail">
+  template: `<div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
     <h2>{{ event?.name }}</h2>
     <div>Date: {{ event?.date }}</div>
     <div [ngClass]="{red:event?.time==='8:00 am',bold:event?.time==='8:00 am'}" [ngSwitch]="event?.time">
@@ -37,4 +37,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class EventThumbnailComponent {
   @Input() event:any
+
+  getStartTimeStyle():any {
+    if (this.event && this.event.time === '8:00 am')
+      return {color: '#003300', 'font-weight': 'bold'}
+    return {}
+  }
 }
